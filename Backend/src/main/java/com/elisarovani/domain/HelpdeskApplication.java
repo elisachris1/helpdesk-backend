@@ -1,4 +1,4 @@
-package com.elisarovani.HelpDesk;
+package com.elisarovani.domain;
 
 
 import org.springframework.boot.SpringApplication;
