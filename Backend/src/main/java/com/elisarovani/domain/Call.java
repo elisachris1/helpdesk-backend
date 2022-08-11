@@ -2,21 +2,36 @@ package com.elisarovani.domain;
 
 import com.elisarovani.domain.enums.Priority;
 import com.elisarovani.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Call {
+@Entity
+public class Call implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate openDate = LocalDate.now();
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate closeDate;
     private Priority priority;
     private Status status;
     private String title;
     private String observations;
 
+    @ManyToOne
+    @JoinColumn(name = "Technician_id")
     private Technician technician;
+
+    @ManyToOne
+    @JoinColumn(name="client_id")
     private Client client;
 
     public Call(){
