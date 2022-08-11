@@ -20,7 +20,6 @@ public abstract class Person implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name="id")
         protected Integer id;
         protected String name;
         @Column(unique = true)

@@ -7,6 +7,7 @@ import com.elisarovani.domain.enums.Profile;
 import com.elisarovani.domain.enums.Status;
 import com.elisarovani.domain.repositories.CallRepository;
 import com.elisarovani.domain.repositories.ClientRepository;
+import com.elisarovani.domain.repositories.PersonRepository;
 import com.elisarovani.domain.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class DBService {
     @Autowired
     private CallRepository callRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     public void instanceDB(){
 
         Technician tec1 = new Technician(null, "John Doe", "jdoe@gmail.com", "johnny123");
@@ -35,5 +39,6 @@ public class DBService {
         technicianRepository.saveAll(Arrays.asList(tec1));
         clientRepository.saveAll(Arrays.asList(cli1));
         callRepository.saveAll(Arrays.asList(c1));
+        personRepository.saveAll(Arrays.asList());
     }
 }

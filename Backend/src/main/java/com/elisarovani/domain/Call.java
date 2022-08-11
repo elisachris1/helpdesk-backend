@@ -39,6 +39,7 @@ public class Call implements Serializable {
     }
 
     public Call(Integer id, Priority priority, Status status, String title, String observations, Technician technician, Client client) {
+        super();
         this.id = id;
         this.priority = priority;
         this.status = status;
@@ -121,10 +122,10 @@ public class Call implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Call call = (Call) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Call call = (Call) obj;
         return id.equals(call.id);
     }
 
