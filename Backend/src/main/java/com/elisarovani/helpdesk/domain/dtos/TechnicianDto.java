@@ -24,7 +24,9 @@ public class TechnicianDto implements Serializable {
         protected LocalDate dateCreated = LocalDate.now();
 
     public TechnicianDto(){
+
         super();
+        addProfile(Profile.CLIENT);
     }
     public TechnicianDto(Technician obj) {
         super();

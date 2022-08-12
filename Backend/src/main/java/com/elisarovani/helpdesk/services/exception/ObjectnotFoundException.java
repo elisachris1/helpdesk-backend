@@ -1,4 +1,4 @@
-package com.elisarovani.helpdesk.services;
+package com.elisarovani.helpdesk.services.exception;
 
 
 public class ObjectnotFoundException extends RuntimeException{
