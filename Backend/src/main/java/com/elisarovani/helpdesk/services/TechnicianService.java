@@ -1,6 +1,7 @@
 package com.elisarovani.helpdesk.services;
 
 import com.elisarovani.helpdesk.domain.Technician;
+import com.elisarovani.helpdesk.domain.dtos.TechnicianDto;
 import com.elisarovani.helpdesk.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,11 @@ public class TechnicianService {
 
     public List<Technician> findAll() {
         return repository.findAll();
+    }
+
+    public Technician create(TechnicianDto objDto) {
+        objDto.setId(null);
+        Technician newObj = new Technician(objDto);
+        return repository.save(newObj);
     }
 }
