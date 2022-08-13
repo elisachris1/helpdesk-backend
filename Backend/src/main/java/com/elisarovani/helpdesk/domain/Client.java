@@ -1,7 +1,6 @@
 package com.elisarovani.helpdesk.domain;
 
-import com.elisarovani.helpdesk.domain.dtos.ClientDto;
-import com.elisarovani.helpdesk.domain.dtos.TechnicianDto;
+import com.elisarovani.helpdesk.domain.dtos.ClientDTO;
 import com.elisarovani.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +27,7 @@ public class Client extends Person {
         super(id, name, email, password);
 
     }
-    public Client(ClientDto obj) {
+    public Client(ClientDTO obj) {
         super();
         this.id = obj.getId();
         this.name = obj.getName();

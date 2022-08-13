@@ -2,12 +2,9 @@ package com.elisarovani.helpdesk.services;
 
 import com.elisarovani.helpdesk.domain.Client;
 import com.elisarovani.helpdesk.domain.Person;
-import com.elisarovani.helpdesk.domain.Technician;
-import com.elisarovani.helpdesk.domain.dtos.ClientDto;
-import com.elisarovani.helpdesk.domain.dtos.TechnicianDto;
+import com.elisarovani.helpdesk.domain.dtos.ClientDTO;
 import com.elisarovani.helpdesk.repositories.ClientRepository;
 import com.elisarovani.helpdesk.repositories.PersonRepository;
-import com.elisarovani.helpdesk.repositories.TechnicianRepository;
 import com.elisarovani.helpdesk.services.exception.DataIntegrityViolationException;
 import com.elisarovani.helpdesk.services.exception.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +32,13 @@ public class ClientService {
         return repository.findAll();
     }
 
-    public Client create(ClientDto objDto) {
+    public Client create(ClientDTO objDto) {
         objDto.setId(null);
         validateByEmail(objDto);
         Client newObj = new Client(objDto);
         return repository.save(newObj);
     }
-    public Client update(Integer id, @Valid ClientDto objDto) {
+    public Client update(Integer id, @Valid ClientDTO objDto) {
         objDto.setId(id);
         Client oldObj = findById(id);
         validateByEmail(objDto);
@@ -58,7 +55,7 @@ public class ClientService {
 
     }
 
-    private void validateByEmail(ClientDto objDto) {
+    private void validateByEmail(ClientDTO objDto) {
         Optional<Person> obj = personRepository.findByEmail(objDto.getEmail());
         if(obj.isPresent() && obj.get().getId() != objDto.getId()){
             throw new DataIntegrityViolationException("Email already registered!");

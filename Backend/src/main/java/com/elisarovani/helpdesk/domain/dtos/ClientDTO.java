@@ -2,7 +2,6 @@ package com.elisarovani.helpdesk.domain.dtos;
 
 
 import com.elisarovani.helpdesk.domain.Client;
-import com.elisarovani.helpdesk.domain.Technician;
 import com.elisarovani.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -13,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ClientDto implements Serializable {
+public class ClientDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,12 +28,12 @@ public class ClientDto implements Serializable {
         @JsonFormat(pattern = "yyyy/MM/dd")
         protected LocalDate dateCreated = LocalDate.now();
 
-    public ClientDto(){
+    public ClientDTO(){
 
         super();
         addProfile(Profile.CLIENT);
     }
-    public ClientDto(Client obj) {
+    public ClientDTO(Client obj) {
         super();
         this.id = obj.getId();
         this.name = obj.getName();

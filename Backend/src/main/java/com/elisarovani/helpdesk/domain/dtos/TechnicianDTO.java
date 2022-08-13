@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TechnicianDto implements Serializable {
+public class TechnicianDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,12 +29,12 @@ public class TechnicianDto implements Serializable {
         @JsonFormat(pattern = "yyyy/MM/dd")
         protected LocalDate dateCreated = LocalDate.now();
 
-    public TechnicianDto(){
+    public TechnicianDTO(){
 
         super();
         addProfile(Profile.CLIENT);
     }
-    public TechnicianDto(Technician obj) {
+    public TechnicianDTO(Technician obj) {
         super();
         this.id = obj.getId();
         this.name = obj.getName();

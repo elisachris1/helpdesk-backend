@@ -2,7 +2,7 @@ package com.elisarovani.helpdesk.services;
 
 import com.elisarovani.helpdesk.domain.Person;
 import com.elisarovani.helpdesk.domain.Technician;
-import com.elisarovani.helpdesk.domain.dtos.TechnicianDto;
+import com.elisarovani.helpdesk.domain.dtos.TechnicianDTO;
 import com.elisarovani.helpdesk.repositories.PersonRepository;
 import com.elisarovani.helpdesk.repositories.TechnicianRepository;
 import com.elisarovani.helpdesk.services.exception.DataIntegrityViolationException;
@@ -32,13 +32,13 @@ public class TechnicianService {
         return repository.findAll();
     }
 
-    public Technician create(TechnicianDto objDto) {
+    public Technician create(TechnicianDTO objDto) {
         objDto.setId(null);
         validateByEmail(objDto);
         Technician newObj = new Technician(objDto);
         return repository.save(newObj);
     }
-    public Technician update(Integer id, @Valid TechnicianDto objDto) {
+    public Technician update(Integer id, @Valid TechnicianDTO objDto) {
         objDto.setId(id);
         Technician oldObj = findById(id);
         validateByEmail(objDto);
@@ -55,7 +55,7 @@ public class TechnicianService {
 
     }
 
-    private void validateByEmail(TechnicianDto objDto) {
+    private void validateByEmail(TechnicianDTO objDto) {
         Optional<Person> obj = personRepository.findByEmail(objDto.getEmail());
         if(obj.isPresent() && obj.get().getId() != objDto.getId()){
             throw new DataIntegrityViolationException("Email already registered!");

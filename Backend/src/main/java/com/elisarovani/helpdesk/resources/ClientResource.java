@@ -1,11 +1,8 @@
 package com.elisarovani.helpdesk.resources;
 
 import com.elisarovani.helpdesk.domain.Client;
-import com.elisarovani.helpdesk.domain.Technician;
-import com.elisarovani.helpdesk.domain.dtos.ClientDto;
-import com.elisarovani.helpdesk.domain.dtos.TechnicianDto;
+import com.elisarovani.helpdesk.domain.dtos.ClientDTO;
 import com.elisarovani.helpdesk.services.ClientService;
-import com.elisarovani.helpdesk.services.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,32 +22,32 @@ public class ClientResource {
     private ClientService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ClientDto> findById(@PathVariable Integer id){
+    public ResponseEntity<ClientDTO> findById(@PathVariable Integer id){
         Client obj = this.service.findById(id);
-        return ResponseEntity.ok().body(new ClientDto(obj));
+        return ResponseEntity.ok().body(new ClientDTO(obj));
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientDto>> findAll(){
+    public ResponseEntity<List<ClientDTO>> findAll(){
         List<Client> list = service.findAll();
-        List<ClientDto> listDto = list.stream().map(obj -> new ClientDto(obj)).collect(Collectors.toList());
+        List<ClientDTO> listDto = list.stream().map(obj -> new ClientDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
     @PostMapping
-    public ResponseEntity<ClientDto> create (@Valid @RequestBody ClientDto objDto){
+    public ResponseEntity<ClientDTO> create (@Valid @RequestBody ClientDTO objDto){
         Client newObj = service.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<ClientDto> update(@PathVariable Integer id, @Valid @RequestBody ClientDto objDto){
+    public ResponseEntity<ClientDTO> update(@PathVariable Integer id, @Valid @RequestBody ClientDTO objDto){
         Client obj = service.update(id, objDto);
-        return ResponseEntity.ok().body(new ClientDto(obj));
+        return ResponseEntity.ok().body(new ClientDTO(obj));
     }
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<ClientDto> delete(@PathVariable Integer id){
+    public ResponseEntity<ClientDTO> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
 
