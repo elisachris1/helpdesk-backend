@@ -4,6 +4,9 @@ package com.elisarovani.helpdesk.domain.dtos;
 import com.elisarovani.helpdesk.domain.Technician;
 import com.elisarovani.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotNull;
+
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,8 +18,11 @@ public class TechnicianDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
         protected Integer id;
+        @NotNull(message = "Name is required")
         protected String name;
+        @NotNull(message = "Email is required")
         protected String email;
+        @NotNull(message = "Password is required")
         protected String password;
         protected Set<Integer> profiles = new HashSet<>();
 
