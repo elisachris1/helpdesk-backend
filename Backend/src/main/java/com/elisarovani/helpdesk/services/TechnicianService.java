@@ -10,6 +10,7 @@ import com.elisarovani.helpdesk.services.exception.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class TechnicianService {
         return obj.orElseThrow(() -> new ObjectnotFoundException("Object not found! Id: " + id));
     }
 
+
     public List<Technician> findAll() {
         return repository.findAll();
     }
@@ -36,6 +38,15 @@ public class TechnicianService {
         Technician newObj = new Technician(objDto);
         return repository.save(newObj);
     }
+    public Technician update(Integer id, @Valid TechnicianDto objDto) {
+        objDto.setId(id);
+        Technician oldObj = findById(id);
+        validateByEmail(objDto);
+        oldObj = new Technician(objDto);
+        return repository.save(oldObj);
+
+
+    }
 
     private void validateByEmail(TechnicianDto objDto) {
         Optional<Person> obj = personRepository.findByEmail(objDto.getEmail());
@@ -44,4 +55,6 @@ public class TechnicianService {
         }
 
     }
+
+
 }
