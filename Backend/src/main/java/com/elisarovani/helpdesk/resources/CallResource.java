@@ -37,4 +37,10 @@ public class CallResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(objDTO.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value="/{id}")
+    public ResponseEntity<CallDTO> update(@PathVariable Integer id,@Valid @RequestBody CallDTO objDTO){
+        Call newObj = service.update(id, objDTO);
+        return ResponseEntity.ok().body(new CallDTO(newObj));
+    }
 }
