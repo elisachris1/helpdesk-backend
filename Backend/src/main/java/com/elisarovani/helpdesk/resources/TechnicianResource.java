@@ -26,11 +26,14 @@ public class TechnicianResource {
         Technician obj = this.service.findById(id);
         return ResponseEntity.ok().body(new TechnicianDto(obj));
     }
+
+    @GetMapping
     public ResponseEntity<List<TechnicianDto>> findAll(){
         List<Technician> list = service.findAll();
         List<TechnicianDto> listDto = list.stream().map(obj -> new TechnicianDto(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
+
     @PostMapping
     public ResponseEntity<TechnicianDto> create (@Valid @RequestBody TechnicianDto objDto){
         Technician newObj = service.create(objDto);
@@ -42,5 +45,11 @@ public class TechnicianResource {
     public ResponseEntity<TechnicianDto> update(@PathVariable Integer id, @Valid @RequestBody TechnicianDto objDto){
         Technician obj = service.update(id, objDto);
         return ResponseEntity.ok().body(new TechnicianDto(obj));
+    }
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<TechnicianDto> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+
     }
 }

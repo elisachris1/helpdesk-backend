@@ -45,6 +45,13 @@ public class TechnicianService {
         oldObj = new Technician(objDto);
         return repository.save(oldObj);
 
+    }
+    public void delete(Integer id) {
+        Technician obj = findById(id);
+        if(obj.getCalls().size() > 0){
+            throw new DataIntegrityViolationException("Technician has calls and cannot be deleted!");
+        }
+            repository.deleteById(id);
 
     }
 
@@ -55,6 +62,7 @@ public class TechnicianService {
         }
 
     }
+
 
 
 }
