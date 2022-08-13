@@ -98,7 +98,7 @@ public class Call implements Serializable {
     }
 
     public String getObservations() {
-        return observations;
+        return this.observations;
     }
 
     public void setObservations(String observations) {

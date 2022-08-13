@@ -1,8 +1,8 @@
 package com.elisarovani.helpdesk.domain.dtos;
 import com.elisarovani.helpdesk.domain.Call;
-import com.elisarovani.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,11 +15,17 @@ public class CallDTO implements Serializable {
     private LocalDate openDate = LocalDate.now();
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate closeDate;
+    @NotNull(message = "Priority is required")
     private Integer priority;
-    private Status status;
+
+    private Integer status;
+    @NotNull(message = "Title is required")
     private String title;
+    @NotNull(message = "Observations are required")
     private String observations;
+    @NotNull(message = "Technician is required")
     private Integer technician;
+    @NotNull(message = "Client is required")
     private Integer client;
     private String nameTechnician;
     private String nameClient;
@@ -33,7 +39,7 @@ public class CallDTO implements Serializable {
         this.openDate = obj.getOpenDate();
         this.closeDate = obj.getCloseDate();
         this.priority = obj.getPriority().getCode();
-        this.status = obj.getStatus();
+        this.status = obj.getStatus().getCode();
         this.title = obj.getTitle();
         this.observations = obj.getObservations();
         this.technician = obj.getTechnician().getId();
@@ -74,11 +80,11 @@ public class CallDTO implements Serializable {
         this.priority = priority;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
