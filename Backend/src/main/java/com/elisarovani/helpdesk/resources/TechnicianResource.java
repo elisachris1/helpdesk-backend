@@ -5,6 +5,7 @@ import com.elisarovani.helpdesk.domain.dtos.TechnicianDTO;
 import com.elisarovani.helpdesk.services.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,7 +34,7 @@ public class TechnicianResource {
         List<TechnicianDTO> listDto = list.stream().map(obj -> new TechnicianDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TechnicianDTO> create (@Valid @RequestBody TechnicianDTO objDto){
         Technician newObj = service.create(objDto);
