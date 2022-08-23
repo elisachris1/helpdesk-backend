@@ -46,6 +46,9 @@ public class ClientService {
     public Client update(Integer id, @Valid ClientDTO objDto) {
         objDto.setId(id);
         Client oldObj = findById(id);
+        if(!objDto.getPassword().equals(oldObj.getPassword())){
+            objDto.setPassword(encoder.encode(objDto.getPassword()));
+        }
         validateByEmail(objDto);
         oldObj = new Client(objDto);
         return repository.save(oldObj);
