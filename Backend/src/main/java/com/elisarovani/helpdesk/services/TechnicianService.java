@@ -37,6 +37,7 @@ public class TechnicianService {
 
     public Technician create(TechnicianDTO objDto) {
         objDto.setId(null);
+        objDto.setPassword(encoder.encode(objDto.getPassword()));
         validateByEmail(objDto);
         Technician newObj = new Technician(objDto);
         return repository.save(newObj);
@@ -44,6 +45,11 @@ public class TechnicianService {
     public Technician update(Integer id, @Valid TechnicianDTO objDto) {
         objDto.setId(id);
         Technician oldObj = findById(id);
+
+        if(!objDto.getPassword().equals(oldObj.getPassword())){
+            objDto.setPassword(encoder.encode(objDto.getPassword()));
+            }
+
         validateByEmail(objDto);
         oldObj = new Technician(objDto);
         return repository.save(oldObj);
